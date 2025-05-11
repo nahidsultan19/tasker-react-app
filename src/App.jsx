@@ -2,6 +2,7 @@ import './App.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
+import TaskBoard from './task/TaskBoard'
 
 function App() {
   
@@ -9,7 +10,10 @@ function App() {
   return (
     <>
      <Header/>
-     <HeroSection/>
+     <div className="flex flex-col justify-center items-center">
+      <HeroSection/>
+      <TaskBoard/>
+     </div>
      <Footer/>
     </>
   )

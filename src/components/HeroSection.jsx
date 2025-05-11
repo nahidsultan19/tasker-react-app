@@ -2,7 +2,7 @@ import frame from "../assets/frame.png"
 const HeroSection = () => {
   return (
     <section class="pb-[114px] pt-20 md:mt-[100px]">
-		<div class="container lg:px-20">
+		<div class="lg:px-20">
 			<div class="grid items-center gap-6 md:grid-cols-2">
 				<div class="flex justify-center md:order-2">
 					<img class="max-md:w-full" src={frame} width="326" height="290" alt="frame" />
