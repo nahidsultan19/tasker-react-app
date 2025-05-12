@@ -1,4 +1,13 @@
-const SearchTask = () => {
+import { useState } from "react";
+
+const SearchTask = ({onSearch}) => {
+  const [searchTerm, setsearchTerm] = useState('');
+
+  const handleClick=(event)=>{
+    event.preventDefault();
+    onSearch(searchTerm);
+  }
+
   return (
     <form>
       <div className="flex">
@@ -8,9 +17,12 @@ const SearchTask = () => {
             id="search-dropdown"
             className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
             placeholder="Search Task"
+            value={searchTerm}
+            onChange={()=> setsearchTerm(event.target.value)}
             required
           />
           <button
+            onClick={handleClick}
             type="submit"
             className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
           >
