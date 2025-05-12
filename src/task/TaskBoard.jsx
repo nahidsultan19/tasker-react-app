@@ -16,31 +16,52 @@ const TaskBoard = () => {
 
 	const [tasks, setTasks] = useState([defaultTask]);
 	const [showAddModal, setShowAddModal] = useState(false);
-	const [taskToUpdate, setTaskToUpdate] = useState(false)
+	
+	// state for update task
+	const [taskToUpdate, setTaskToUpdate] = useState(null)
 
-	const handleAddEditTask=(newTask, isAdd)=>{
+
+	const handleAddEditTask=(newTask,isAdd)=>{
 		if(isAdd){
-			setTasks([...tasks, newTask]);
+			setTasks([...tasks, newTask])
 		}else{
-			const edit = tasks.map((task)=>{
-				if(task.id ===newTask.id){
-					return newTask
+			setTasks(tasks?.map(task=>{
+				if(task.id === newTask.id){
+					return newTask;
 				}
-				return task
-			})
-			setTasks(edit);
+				return task;
+			}))
 		}
+		
 		setShowAddModal(false);
+
+		// after update the field, clear the state to add new 
+		setTaskToUpdate(null);
 	}
 
 	const handleEditTask=(task)=>{
-		setTaskToUpdate(task)
+		setTaskToUpdate(task);
 		setShowAddModal(true)
+
 	}
 
+	// close the modal 
 	const handleCloseClick=()=>{
 		setShowAddModal(false);
 		setTaskToUpdate(null);
+	}
+
+	// delete the task
+	const handleDeleteTask=(taskId)=>{
+		console.log('deleting item',taskId)
+		const deleteTask = tasks.filter(task=> task.id !== taskId);
+		setTasks(deleteTask);
+	}
+
+	//delete all tasks
+	const handleDeleteAllCLick=()=>{
+		tasks.length= 0;
+		setTasks([...tasks]);
 	}
 
 	return (
@@ -53,8 +74,8 @@ const TaskBoard = () => {
 			</div>
 			
 				<div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-					<TaskActions onAddClick={()=>  setShowAddModal(true)}/>
-					<TaskList tasks={tasks} onEdit={handleEditTask}/>
+					<TaskActions onAddClick={()=> setShowAddModal(true)} onDeleteAllClick={handleDeleteAllCLick}/>
+					<TaskList tasks={tasks} onEdit={handleEditTask} onDelete={handleDeleteTask}/>
 				</div>
 			</div>
 		</section>
